@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "groups")
-class Group {
+public class Group {
 
     public Group() {
     }
@@ -39,6 +39,10 @@ class Group {
     private Set<Teacher> teachers;
     
     private String name;
+    
+    public void addTeacher(Teacher t){
+        teachers.add(t);
+    }
 
     public Long getId() {
         return id;

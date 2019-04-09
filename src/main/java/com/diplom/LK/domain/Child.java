@@ -5,30 +5,37 @@
  */
 package com.diplom.LK.domain;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  *
  * @author Валерия
  */
-public class Child {
+@Entity
+@Table(name = "children")
+public class Child implements Serializable {
 
     public Child() {
     }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private User user;
-
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
+//    private User user;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "childId")
+    private User user;
 
     private String firstName;
 
@@ -36,20 +43,24 @@ public class Child {
 
     private String patronymic;
 
-    public User getUser() {
-        return user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "groupId")
+    private Group group;
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Long getUser() {
+        return user.getId();
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

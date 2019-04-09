@@ -5,6 +5,7 @@
  */
 package com.diplom.LK.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,23 +16,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  *
  * @author Валерия
  */
 @Entity
-public class Teacher {
+@Table(name = "teachers")
+public class Teacher implements Serializable {
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    private User user;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @PrimaryKeyJoinColumn
+//    private User user;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacherId")
+    private User user;
 
     public Teacher() {
     }
@@ -42,6 +47,8 @@ public class Teacher {
 
     private String patronymic;
 
+    @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "positionId")
     private Position position;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -56,9 +63,13 @@ public class Teacher {
                 @JoinColumn(name = "groupId")}
     )
     private Set<Group> groups;
+    
+    public void addGroup(Group g){
+        groups.add(g);
+    }
 
-    public User getUser() {
-        return user;
+    public Long getUser() {
+        return user.getId();
     }
 
     public void setUser(User user) {
@@ -73,13 +84,7 @@ public class Teacher {
         this.groups = groups;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
 
     public String getFirstName() {
         return firstName;
