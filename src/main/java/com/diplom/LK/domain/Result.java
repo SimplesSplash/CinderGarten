@@ -28,7 +28,7 @@ public class Result {
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "childId")
-    private User child;
+    private Child child;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "criteriaId")
@@ -44,11 +44,11 @@ public class Result {
         this.id = id;
     }
 
-    public User getChild() {
+    public Child getChild() {
         return child;
     }
 
-    public void setChild(User child) {
+    public void setChild(Child child) {
         this.child = child;
     }
 

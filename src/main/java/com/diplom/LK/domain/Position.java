@@ -17,19 +17,28 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "positions")
-class Position {
+public class Position {
+     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String position;
 
     public Position() {
     }
+
+    @Override
+    public String toString() {
+        return "Position{" + "id=" + id + ", name=" + position + '}';
+    }
+    
+    
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+   
     public String getPosition() {
         return position;
     }
@@ -37,9 +46,5 @@ class Position {
     public void setPosition(String position) {
         this.position = position;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private String position;
+   
 }

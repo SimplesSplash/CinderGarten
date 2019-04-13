@@ -7,6 +7,7 @@ package com.diplom.LK.domain;
 
 import java.util.Collection;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -45,6 +48,35 @@ public class User implements UserDetails{
     private Set<Role> roles;
     
     private boolean active;
+    
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @PrimaryKeyJoinColumn
+    private Teacher teacher;
+    
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Child child;
+    
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Child getChild() {
+        return child;
+    }
+
+    public void setChild(Child child) {
+        this.child = child;
+    }
 
     public Long getId() {
         return id;

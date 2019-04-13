@@ -5,6 +5,7 @@
  */
 package com.diplom.LK.config;
 
+import com.diplom.LK.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,18 +28,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private  PasswordEncoder passwordEncoder;
+    
 
     @Bean
     public PasswordEncoder getPasswordEncoder(){
         return  new BCryptPasswordEncoder(8);
     }
+    
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/",  "/static/**").permitAll()
+                .antMatchers("/static/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

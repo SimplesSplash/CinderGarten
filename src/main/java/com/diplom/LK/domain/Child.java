@@ -6,16 +6,12 @@
 package com.diplom.LK.domain;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -28,22 +24,26 @@ public class Child implements Serializable {
 
     public Child() {
     }
+    
+    @Id 
+    @Column(name = "child_id")
+    private Long id;
 
-//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
-//    private User user;
-    @Id
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "childId")
-    private User user;
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     private String firstName;
 
     private String lastName;
 
     private String patronymic;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groupId")
     private Group group;
 
@@ -55,13 +55,6 @@ public class Child implements Serializable {
         this.group = group;
     }
 
-    public Long getUser() {
-        return user.getId();
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getFirstName() {
         return firstName;

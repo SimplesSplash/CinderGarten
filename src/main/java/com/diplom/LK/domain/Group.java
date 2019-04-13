@@ -12,7 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -30,7 +32,7 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
@@ -40,9 +42,26 @@ public class Group {
     
     private String name;
     
+    @OneToOne
+     @JoinColumn(name = "tutor_id")
+    private Teacher tutor;
+
+    public Teacher getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Teacher tutor) {
+        this.tutor = tutor;
+    }
+    
     public void addTeacher(Teacher t){
         teachers.add(t);
     }
+    
+    public void removeTeacher(Teacher t){
+        teachers.remove(t);
+    }
+            
 
     public Long getId() {
         return id;

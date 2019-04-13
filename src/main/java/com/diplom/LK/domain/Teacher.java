@@ -6,12 +6,12 @@
 package com.diplom.LK.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -29,14 +29,11 @@ import javax.persistence.Table;
 @Table(name = "teachers")
 public class Teacher implements Serializable {
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @PrimaryKeyJoinColumn
-//    private User user;
-
     @Id
-     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacherId")
-    private User user;
+    @Column(name = "teacher_id")
+    private Long id;
+
+    
 
     public Teacher() {
     }
@@ -47,11 +44,11 @@ public class Teacher implements Serializable {
 
     private String patronymic;
 
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "positionId")
     private Position position;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
@@ -64,17 +61,31 @@ public class Teacher implements Serializable {
     )
     private Set<Group> groups;
     
-    public void addGroup(Group g){
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Group group;
+    
+      public Long getId() {
+        return id;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public void addGroup(Group g) {
         groups.add(g);
     }
 
-    public Long getUser() {
-        return user.getId();
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+   
 
     public Set<Group> getGroups() {
         return groups;
@@ -83,8 +94,6 @@ public class Teacher implements Serializable {
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
-
-   
 
     public String getFirstName() {
         return firstName;
@@ -117,7 +126,46 @@ public class Teacher implements Serializable {
     public void setPosition(Position position) {
         this.position = position;
     }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 13 * hash + Objects.hashCode(this.firstName);
+        hash = 13 * hash + Objects.hashCode(this.lastName);
+        hash = 13 * hash + Objects.hashCode(this.patronymic);
+        hash = 13 * hash + Objects.hashCode(this.position);
+        hash = 13 * hash + Objects.hashCode(this.groups);
+        return hash;
+    }
 
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Teacher other = (Teacher) obj;
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.patronymic, other.patronymic)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.position, other.position)) {
+            return false;
+        }
+        return Objects.equals(this.groups, other.groups);
+    }
 
 }
