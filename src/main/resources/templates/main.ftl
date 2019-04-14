@@ -19,6 +19,8 @@
    <div>${child.patronymic}</div>
    <h3>Группа:</h3>
    <div>${child.group.name}</div>
+   <#else>
+   <div>Hello, admin</div>
    </#if>
 </div>
 </@t.page>
