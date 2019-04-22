@@ -6,15 +6,20 @@
 package com.diplom.LK.Services;
 
 import com.diplom.LK.domain.Child;
+import com.diplom.LK.domain.Group;
 import com.diplom.LK.domain.User;
 import com.diplom.LK.repos.ChildRepo;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Валерия
  */
+@Service
 public class ChildService {
     
     @Autowired
@@ -24,12 +29,48 @@ public class ChildService {
     UserService userService;
     
      public List<Child> findByTutor(Long userId) {
-        List<Child> aviableRecipients;
-        User user=userService.findById(userId);
-        aviableRecipients = childRepo.findByGroup(user.
-                getTeacher().
-                getGroup().
-                getId());
-        return aviableRecipients;
+        List<Child> children=new ArrayList<Child>();
+        try{
+            User user=userService.findById(userId);
+        children = childRepo.findByGroup(user.
+                                        getTeacher().
+                                        getGroup());
+        
+        }catch(Exception e){
+            return null;
+        }
+        
+        return children;
     }
+     
+     public List<Child> findByTeacher(Long userId) {
+         List<Child> children =new ArrayList<Child>();
+          try{
+         User user = userService.findById(userId);
+         Set<Group> teacherGroups = user.getTeacher().getGroups();
+         for(Group group : teacherGroups){
+             List<Child> childrenByGroup = childRepo.findByGroup(group);
+             children.addAll(childrenByGroup);
+         }
+         }catch(Exception e){
+             
+            return null;
+        }
+         return children;
+     }
+     public List<Child> findAviableRecipients(Long user){
+         List<Child> aviableRecipients=new ArrayList<>();
+         List<Child> childrenByTutor = findByTutor(user);
+         List<Child> childrenByTeacher =findByTeacher(user);
+
+            if (childrenByTutor != null && !childrenByTutor.isEmpty()) {
+                aviableRecipients.addAll(childrenByTutor);
+            }
+
+            if (childrenByTeacher != null && !childrenByTeacher.isEmpty()) {
+                aviableRecipients.addAll(childrenByTeacher);
+            }
+        return aviableRecipients;        
+     }
+     
 }

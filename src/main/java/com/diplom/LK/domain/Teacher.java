@@ -6,6 +6,7 @@
 package com.diplom.LK.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -18,7 +19,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -59,10 +59,14 @@ public class Teacher implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "groupId")}
     )
-    private Set<Group> groups;
+    private Set<Group> groups = new HashSet();
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Group group;
+    
+    public String getFullName(){
+        return lastName+" "+firstName+" "+patronymic;
+    }
     
       public Long getId() {
         return id;

@@ -5,6 +5,7 @@
  */
 package com.diplom.LK.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,7 +39,7 @@ public class Group {
                 CascadeType.MERGE
             },
             mappedBy = "groups")
-    private Set<Teacher> teachers;
+    private Set<Teacher> teachers = new HashSet();
     
     private String name;
     

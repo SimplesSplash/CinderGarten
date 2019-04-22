@@ -12,9 +12,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
             </li>
+            <#if isTeacher || isChild>
             <li class="nav-item">
                 <a class="nav-link" href="/messages">Сообщения</a>
             </li>   
+            </#if>
             <#if isAdmin>
             <li class="nav-item">
                 <a class="nav-link" href="/user">Список пользователей</a>

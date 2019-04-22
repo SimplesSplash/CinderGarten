@@ -5,10 +5,11 @@
  */
 package com.diplom.LK.Controllers;
 
+import com.diplom.LK.Services.TeacherService;
 import com.diplom.LK.domain.Role;
+import com.diplom.LK.domain.Teacher;
 import com.diplom.LK.domain.User;
 import com.diplom.LK.repos.ChildRepo;
-import com.diplom.LK.repos.TeacherRepo;
 import com.diplom.LK.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,7 +31,7 @@ public class MainController {
     UserRepo userRepo;
 
     @Autowired
-    TeacherRepo teacherRepo;
+    TeacherService teacherService;
 
     @GetMapping("/")
     public String getUser(@AuthenticationPrincipal User user, Model model) {
@@ -40,6 +41,8 @@ public class MainController {
         } else {
             if(user.getRoles().contains(Role.CHILD)){
                 model.addAttribute("child", user.getChild());
+                Teacher tutor = teacherService.fingTutorByChild(user.getId());
+                model.addAttribute("tutor", tutor);
             }
         }
 

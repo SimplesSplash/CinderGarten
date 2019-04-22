@@ -19,6 +19,10 @@
    <div>${child.patronymic}</div>
    <h3>Группа:</h3>
    <div>${child.group.name}</div>
+   <div>
+       <h4>Воспитатель:</h4>
+       <div>${tutor.fullName}</div>
+   </div>
    <#else>
    <div>Hello, admin</div>
    </#if>

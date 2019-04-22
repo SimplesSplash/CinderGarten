@@ -6,6 +6,7 @@
 package com.diplom.LK.repos;
 
 import com.diplom.LK.domain.Child;
+import com.diplom.LK.domain.Group;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChildRepo  extends CrudRepository<Child, Integer>{
     
-    List<Child> findByGroup(Long group);
+    List<Child> findByGroup(Group group);
 }

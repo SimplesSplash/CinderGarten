@@ -46,6 +46,10 @@ public class Child implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groupId")
     private Group group;
+    
+    public String getFullName(){
+        return lastName+" "+firstName+" "+patronymic;
+    }
 
     public Group getGroup() {
         return group;
