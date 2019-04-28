@@ -13,6 +13,10 @@
        <div>${group.name}</div>
        </#list>
    </div>
+   <div><#if teacher.group??>
+       ${teacher.group.name}
+       </#if>
+   </div>
    <#elseif child??>
     <div>${child.firstName}</div>
    <div>${child.lastName}</div>

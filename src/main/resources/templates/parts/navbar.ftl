@@ -22,11 +22,7 @@
                 <a class="nav-link" href="/user">Список пользователей</a>
             </li>
             </#if>
-            <#if user??>
-            <li class="nav-item">
-                <a class="nav-link" href="/user/profile">Профиль</a>
-            </li>
-            </#if>
+            
         </ul>
         <div class=" navbar-text mr-2">${name}</div>
         <#if known>

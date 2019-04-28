@@ -14,9 +14,8 @@ import com.diplom.LK.domain.Role;
 import com.diplom.LK.domain.Teacher;
 import com.diplom.LK.domain.User;
 import com.diplom.LK.repos.MessageRepo;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,6 +47,7 @@ public class MessageController {
 
     @GetMapping("/messages")
     public String getMessages(@AuthenticationPrincipal User user, Model model) {
+      
         Iterable<Message> messagesFrom = messageRepo.findBySender(user);
         Iterable<Message> messagesTo = messageRepo.findByRecipient(user);
 
@@ -81,6 +81,7 @@ public class MessageController {
 
             message.setRecipient(recipientUser);
             message.setText(messageText);
+            message.setSendingDate(Calendar.getInstance().getTime());
             messageRepo.save(message);
         }
 

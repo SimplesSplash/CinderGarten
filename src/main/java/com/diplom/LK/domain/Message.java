@@ -5,6 +5,9 @@
  */
 package com.diplom.LK.domain;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -39,9 +42,10 @@ public class Message {
     @JoinColumn(name = "recipientId")
     private User recipient;
 
-    private String sendingDate;
+    private Date sendingDate;
 
     public Long getId() {
+        
         return id;
     }
 
@@ -73,11 +77,15 @@ public class Message {
         this.recipient = recipient;
     }
 
-    public String getSendingDate() {
+    public Date getSendingDate() {
         return sendingDate;
     }
+    
+    public String getFormatedSendingDate(){
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm").format(sendingDate);
+    }
 
-    public void setSendingDate(String sendingDate) {
+    public void setSendingDate(Date sendingDate) {
         this.sendingDate = sendingDate;
     }
 

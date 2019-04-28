@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author Валерия
  */
 public enum Role implements GrantedAuthority{
-    USER, ADMIN, TEACHER, CHILD;
+     ADMIN, TEACHER, CHILD;
 
     @Override
     public String getAuthority() {

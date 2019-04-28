@@ -61,7 +61,7 @@ public class Teacher implements Serializable {
     )
     private Set<Group> groups = new HashSet();
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Group group;
     
     public String getFullName(){

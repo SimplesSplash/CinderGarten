@@ -62,6 +62,7 @@
                                 <#else>
                                 ${message.recipient.getChild().getFullName()}
                                 </#if>
+                                ${message.getFormatedSendingDate()}
                               </button>
                             </h2>
                           </div>
@@ -103,6 +104,7 @@
                                 <#else>
                                 ${message.sender.getChild().getFullName()}
                                 </#if>
+                                ${message.getFormatedSendingDate()}
                               </button>
                             </h2>
                           </div>
