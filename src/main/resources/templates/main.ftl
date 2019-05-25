@@ -7,7 +7,7 @@
    <div>${teacher.firstName}</div>
    <div>${teacher.lastName}</div>
    <div>${teacher.patronymic}</div>
-   <div>${teacher.position.position}</div>
+   <div>${position.position}</div>
    <h3>Группы:</h3>
    <div><#list teacher.groups as group>
        <div>${group.name}</div>

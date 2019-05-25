@@ -16,4 +16,8 @@ import org.springframework.data.repository.CrudRepository;
 public interface GroupRepo extends CrudRepository<Group, Integer>{
     Set<Group> findByName(String name);
     
+    Set<Group> findByTutor(String tutor);
+    
+    
+    
 }

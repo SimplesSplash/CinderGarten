@@ -11,6 +11,7 @@ import com.diplom.LK.repos.TeacherRepo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +29,13 @@ public class TeacherService {
     
     public Teacher fingTutorByChild(Long childId){
         Child child = userService.findById(childId).getChild();
+        Hibernate.initialize(child.getGroup().getTutor());
         return child.getGroup().getTutor();
     }
     
     public Set<Teacher> fingTeachersByChild(Long childId){
         Child child = userService.findById(childId).getChild();
+        Hibernate.initialize(child.getGroup().getTeachers());
         return   child.getGroup().getTeachers();
     }
     

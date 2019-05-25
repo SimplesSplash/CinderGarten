@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.Hibernate;
 
 /**
  *
@@ -44,11 +45,11 @@ public class Teacher implements Serializable {
 
     private String patronymic;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "positionId")
     private Position position;
 
-    @ManyToMany(fetch = FetchType.EAGER,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
@@ -61,7 +62,7 @@ public class Teacher implements Serializable {
     )
     private Set<Group> groups = new HashSet();
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Group group;
     
     public String getFullName(){
@@ -124,6 +125,7 @@ public class Teacher implements Serializable {
     }
 
     public Position getPosition() {
+       
         return position;
     }
 
