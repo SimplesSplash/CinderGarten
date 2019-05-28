@@ -15,4 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface CriteriaRepo extends CrudRepository<Criteria, Integer>{
     Set<Criteria> findByCriteria(String criteria);
+    
+    Set<Criteria> findByPosition(String position);
 }

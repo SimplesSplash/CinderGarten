@@ -22,8 +22,12 @@ public class GroupService {
     GroupRepo groupRepo;
     
     public Set<Group> findByTeacher(Teacher teacher){
-        Hibernate.initialize(teacher.getGroups());
-        return teacher.getGroups();
+        Set<Group> groups=teacher.getGroups();
+        if(null!=teacher.getGroup()){
+             groups.add(teacher.getGroup());
+        }
+       
+        return groups;
         
     }
 }

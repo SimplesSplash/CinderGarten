@@ -18,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChildRepo  extends CrudRepository<Child, Integer>{
     
-    List<Child> findByGroup(Group group);
+    List<Child> findByGroup(int groupId);
 }

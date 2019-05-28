@@ -29,6 +29,10 @@ public class ChildService {
     @Autowired
     UserService userService;
     
+    public List<Child> findByGroup(int groupId){
+        return childRepo.findByGroup(groupId);
+    }
+    
      public List<Child> findByTutor(Long userId) {
         List<Child> children=new ArrayList<Child>();
         try{
@@ -36,7 +40,7 @@ public class ChildService {
             Hibernate.initialize(user.getTeacher().getGroup());
         children = childRepo.findByGroup(user.
                                         getTeacher().
-                                        getGroup());
+                                        getGroup().getId().intValue());
         
         }catch(Exception e){
             return null;
@@ -52,7 +56,7 @@ public class ChildService {
          Hibernate.initialize(user.getTeacher().getGroups());
          Set<Group> teacherGroups = user.getTeacher().getGroups();
          for(Group group : teacherGroups){
-             List<Child> childrenByGroup = childRepo.findByGroup(group);
+             List<Child> childrenByGroup = childRepo.findByGroup(group.getId().intValue());
              children.addAll(childrenByGroup);
          }
          }catch(Exception e){
