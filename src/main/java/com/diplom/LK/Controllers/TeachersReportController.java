@@ -57,7 +57,7 @@ public class TeachersReportController {
       List<Child> children = childService.findByGroup(group.getId().intValue());
       model.addAttribute("criterions", criterions);
       model.addAttribute("children", children);
-              
+   
       return "groupReport";
     }
 }
