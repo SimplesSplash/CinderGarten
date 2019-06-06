@@ -6,17 +6,17 @@
 package com.diplom.LK.repos;
 
 import com.diplom.LK.domain.Child;
-import com.diplom.LK.domain.Group;
+import com.diplom.LK.domain.Result;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Валерия
+ * @author alex1
  */
 @Repository
-public interface ChildRepo  extends JpaRepository<Child, Long>{
+public interface ResultRepo extends JpaRepository<Result, Long>{
     
-    List<Child> findByGroup(Group group);
+    public List<Result> findByChild(Child c);
 }

@@ -7,14 +7,15 @@ package com.diplom.LK.repos;
 
 import java.util.Set;
 import com.diplom.LK.domain.Criteria;
-import org.springframework.data.repository.CrudRepository;
+import com.diplom.LK.domain.Position;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Валерия
  */
-public interface CriteriaRepo extends CrudRepository<Criteria, Integer>{
+public interface CriteriaRepo extends JpaRepository<Criteria, Long>{
     Set<Criteria> findByCriteria(String criteria);
     
-    Set<Criteria> findByPosition(String position);
+    Set<Criteria> findByPosition(Position position);
 }

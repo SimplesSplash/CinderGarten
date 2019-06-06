@@ -12,7 +12,6 @@ import com.diplom.LK.repos.ChildRepo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,18 +28,22 @@ public class ChildService {
     @Autowired
     UserService userService;
     
-    public List<Child> findByGroup(int groupId){
-        return childRepo.findByGroup(groupId);
+    public Child findById(Long id){
+        return childRepo.getOne(id);
+    }
+    
+    public List<Child> findByGroup(Group group){
+        return childRepo.findByGroup(group);
     }
     
      public List<Child> findByTutor(Long userId) {
         List<Child> children=new ArrayList<Child>();
         try{
             User user=userService.findById(userId);
-            Hibernate.initialize(user.getTeacher().getGroup());
+           
         children = childRepo.findByGroup(user.
                                         getTeacher().
-                                        getGroup().getId().intValue());
+                                        getGroup());
         
         }catch(Exception e){
             return null;
@@ -53,10 +56,10 @@ public class ChildService {
          List<Child> children =new ArrayList<Child>();
           try{
          User user = userService.findById(userId);
-         Hibernate.initialize(user.getTeacher().getGroups());
+         
          Set<Group> teacherGroups = user.getTeacher().getGroups();
          for(Group group : teacherGroups){
-             List<Child> childrenByGroup = childRepo.findByGroup(group.getId().intValue());
+             List<Child> childrenByGroup = childRepo.findByGroup(group);
              children.addAll(childrenByGroup);
          }
          }catch(Exception e){

@@ -9,7 +9,7 @@ import com.diplom.LK.domain.Group;
 import com.diplom.LK.domain.Teacher;
 import com.diplom.LK.repos.GroupRepo;
 import java.util.Set;
-import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,7 +19,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class GroupService {
     
+    @Autowired
     GroupRepo groupRepo;
+    
+     public Group findById(Long id) {
+       return groupRepo.getOne(id);
+    }
     
     public Set<Group> findByTeacher(Teacher teacher){
         Set<Group> groups=teacher.getGroups();

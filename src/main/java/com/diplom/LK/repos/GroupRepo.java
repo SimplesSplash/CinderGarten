@@ -7,13 +7,13 @@ package com.diplom.LK.repos;
 
 import com.diplom.LK.domain.Group;
 import java.util.Set;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Валерия
  */
-public interface GroupRepo extends CrudRepository<Group, Integer>{
+public interface GroupRepo extends JpaRepository<Group, Long>{
     Set<Group> findByName(String name);
     
     Set<Group> findByTutor(String tutor);

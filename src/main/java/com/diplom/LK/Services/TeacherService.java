@@ -29,13 +29,13 @@ public class TeacherService {
     
     public Teacher fingTutorByChild(Long childId){
         Child child = userService.findById(childId).getChild();
-        Hibernate.initialize(child.getGroup().getTutor());
+        
         return child.getGroup().getTutor();
     }
     
     public Set<Teacher> fingTeachersByChild(Long childId){
         Child child = userService.findById(childId).getChild();
-        Hibernate.initialize(child.getGroup().getTeachers());
+        
         return   child.getGroup().getTeachers();
     }
     
