@@ -32,6 +32,9 @@ public class ChildService {
         return childRepo.getOne(id);
     }
     
+    public void save(Child c){
+        childRepo.save(c);
+    }
     public List<Child> findByGroup(Group group){
         return childRepo.findByGroup(group);
     }

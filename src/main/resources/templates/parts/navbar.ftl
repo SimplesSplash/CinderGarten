@@ -21,9 +21,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="/user">Список пользователей</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/createUser">Создать пользователя</a>
+            </li>
             </#if> 
+            
              <li class="nav-item">
-                <a class="nav-link" href="/childReports"> Отчеты</a>
+                 <a class="nav-link" href=<#if isChild>"/childReports"</#if><#if isTeacher>"/reports"</#if>> Отчеты</a>
             </li>  
          
         </ul>

@@ -7,15 +7,17 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style1.css"  crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css"  crossorigin="anonymous">
         
     </head>
-    <body>
+    <body style="background-color: #70c1d6">
         <#include "parts/navbar.ftl">
-        <div class="container mt-5">
-            <div>
-                <button class="btn btn-primary my-2" type="button" data-toggle="collapse" data-target="#sendMessage" aria-expanded="false" aria-controls="collapseExample">
-                Написать сообщение
+        <div class="wrap">
+            <div class="main">
+                <div style="margin: 20px;" class="con">
+                    <div style="width:25%;  margin: 30px">
+               <button class="btn btn-primary my-2" type="button" data-toggle="collapse" data-target="#sendMessage" aria-expanded="false" aria-controls="collapseExample">
+                Написать сообщение 
             </button>
             <div class="collapse" id="sendMessage">
             <form action="/messages" method="POST">
@@ -44,7 +46,7 @@
             </div>
             </div>
             
-            <div>
+            <div style="width:25%; margin: 30px">
                  <button class="btn btn-primary my-2" type="button" data-toggle="collapse" data-target="#messageFrom" aria-expanded="false" aria-controls="collapseExample">
                 Отправленные сообщения
             </button>
@@ -68,7 +70,7 @@
                           </div>
 
                           <div id="collapse${message.id}" class="collapse show" aria-labelledby="heading${message.id}" data-parent="#accordionExample">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: white">
                                 ${message.text}
                             </div>
                           </div>
@@ -77,7 +79,7 @@
                        
                         <#else>
                         <div class="card" >
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: white">
                               <h5 class="card-title">Сообщений нет</h5>
                             </div>
                         </div>
@@ -86,7 +88,7 @@
                 </div>
             </div>
             
-            <div>
+            <div style="width:25%; margin: 30px">
                  <button class="btn btn-primary my-2" type="button" data-toggle="collapse" data-target="#messageTo" aria-expanded="false" aria-controls="collapseExample">
                 Полученные сообщения
             </button>
@@ -110,7 +112,7 @@
                           </div>
 
                           <div id="collapse${message.id}" class="collapse show" aria-labelledby="heading${message.id}" data-parent="#accordionExample1">
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: white">
                                 ${message.text}
                             </div>
                           </div>
@@ -119,7 +121,7 @@
                        
                         <#else>
                         <div class="card" >
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: white">
                               <h5 class="card-title">Сообщений нет</h5>
                             </div>
                         </div>
@@ -128,7 +130,8 @@
                 </div>
             </div>
         </div>
-       
+            </div>
+        </div>
        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -166,11 +169,11 @@
                            {
                             "id": ${recipient.id},
                            "fullName": "${recipient.fullName}"
-                }<#sep>, 
-                </#list>
-                    ];
-                    
-                    $('.bs-autocomplete').each(function () {
+                           }<#sep>, 
+                           </#list>
+                           ];
+                
+                $('.bs-autocomplete').each(function () {
                                     var _this = $(this),
                                     _data = _this.data(),
                                     _hidden_field = $('#' + _data.hidden_field_id);
@@ -185,43 +188,45 @@
                                             var _regexp = new RegExp(request.term, 'i');
                                                     var data = recipients.filter(function (item) {
                                                     return item.fullName.match(_regexp);
-          });
-          response(data);
-        },
-      
-      search: function () {
+                          });
+                          response(data);
+                            },
+                            
+                              search: function () {
                                                             feedback_icon.show();
                                                             _hidden_field.val('');
-        },
-        
-        response: function () {
+                                },
+                                    
+                                    response: function () {
                                                             feedback_icon.hide();
-        },
-        
-        focus: function (event, ui) {
+                                },
+                                
+                                focus: function (event, ui) {
                                                             _this.val(ui.item[_data.item_label]);
                                                             event.preventDefault();
-        },
-        
-        select: function (event, ui) {
+                          },
+                          
+                          select: function (event, ui) {
                                                             _this.val(ui.item[_data.item_label]);
                                                             _hidden_field.val(ui.item[_data.item_id]);
                                                             event.preventDefault();
-        }
-        })
-        .data('ui-autocomplete')._renderItem = function (ul, item) {
+                            }
+                            })
+                              .data('ui-autocomplete')._renderItem = function (ul, item) {
                                                             return $('<li></li>')
                                                             .data("item.autocomplete", item)
                                                             .append('<a>' + item[_data.item_label] + '</a>')
                                                             .appendTo(ul);
-        };
-        
-        });
-        })();
-        </script>
+                };
+            
+            });
+                })();
+                </script>
 
 
 
     </body>   
+    <footer></footer>
+    
 </html>
 

@@ -6,6 +6,7 @@
 package com.diplom.LK.domain;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -35,7 +36,7 @@ public class User implements UserDetails{
 
   
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
     private String username;
@@ -45,7 +46,7 @@ public class User implements UserDetails{
     @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private Set<Role> roles= new HashSet<>();
     
     private boolean active;
     
@@ -148,6 +149,10 @@ public class User implements UserDetails{
     @Override
     public boolean isEnabled() {
         return isActive();
+    }
+
+    public void setRole(Role role) {
+        this.roles.add(role);
     }
     
 }

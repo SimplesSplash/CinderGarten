@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
+    
 
     @Autowired
     private PasswordEncoder passwordEncoder;
